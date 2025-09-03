@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'helloworld-htmlimage'
+        IMAGE_NAME = '16p124manoj/dockerhtmlrepo'
         IMAGE_TAG = 'v1'
-        DOCKER_REPO = '16p124manoj/dockerhtmlrepo'
+        DOCKER_REPO = 'helloworld-htmlimage'
     }
 
     stages {
