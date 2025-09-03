@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'helloworld-htmlimage'
-        IMAGE_TAG = 'latest'
+        IMAGE_TAG = 'v1'
     }
 
     stages {
