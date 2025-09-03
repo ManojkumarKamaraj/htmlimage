@@ -25,6 +25,18 @@ pipeline {
             }
         }
 
+        stage('Push Image to Docker-hub'){
+            steps{
+                script{
+                    echo "pushing docker image to docker hub"
+                    docker.withRegistry('https://index.docker.io/v1/', 'jenkins-credentials')
+                    {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+
 
         stage('Cleanup') {
             steps {
