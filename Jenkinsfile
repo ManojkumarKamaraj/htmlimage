@@ -11,6 +11,7 @@ pipeline {
             steps {
                 echo 'checkout the project...'
                 git branch: 'main', credentialsId: 'mygithubcredentials', url: 'https://github.com/ManojkumarKamaraj/htmlimage.git'
+                echo 'get the repo from branch'
             }
         }
 
