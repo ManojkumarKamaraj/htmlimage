@@ -42,7 +42,6 @@ pipeline {
         stage('push to docker-hub'){
             steps{
                 script {
-                    sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} docker.io"
                     sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
