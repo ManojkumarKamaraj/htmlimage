@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                echo 'checkout the project...'
                 git branch: 'main', credentialsId: 'mygithubcredentials', url: 'https://github.com/ManojkumarKamaraj/htmlimage.git'
             }
         }
@@ -22,18 +23,6 @@ pipeline {
             }
         }
 
-        // Optional: Push to DockerHub or private registry
-        /*
-        stage('Push Image') {
-            steps {
-                withDockerRegistry([credentialsId: 'your-dockerhub-creds', url: '']) {
-                    script {
-                        docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()
-                    }
-                }
-            }
-        }
-        */
 
         stage('Cleanup') {
             steps {
