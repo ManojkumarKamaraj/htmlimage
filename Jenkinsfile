@@ -25,15 +25,24 @@ pipeline {
             }
         }
 
-        stage('Push Image to Docker-hub'){
+        stage('login to docker'){
             steps{
                 script{
                     echo "pushing docker image to docker hub"
-                    docker.withRegistry('https://index.docker.io/v1/', 'jenkins-credentials')
-                    {
-                        docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                    withCredentials([usernamePassword(credentialsId: 'jenkins-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    script {
+                        sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
                     }
+                }
                     echo "pushing docker credential"
+                }
+            }
+        }
+
+        stage('push to docker-hub'){
+            steps{
+                script {
+                    sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         }
