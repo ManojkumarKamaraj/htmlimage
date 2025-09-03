@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'helloworld-htmlimage'
         IMAGE_TAG = 'v1'
+        DOCKER_REPO = '16p124manoj/dockerhtmlrepo'
     }
 
     stages {
@@ -42,7 +43,7 @@ pipeline {
         stage('push to docker-hub'){
             steps{
                 script {
-                    sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker push ${DOCKER_REPO}:${IMAGE_TAG}"
                 }
             }
         }
