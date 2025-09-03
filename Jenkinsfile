@@ -32,7 +32,7 @@ pipeline {
                     echo "pushing docker image to docker hub"
                     withCredentials([usernamePassword(credentialsId: 'jenkins-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     script {
-                        sh 'echo "$jenkins-credentials" | docker login -u "$DOCKER_USER" --password-stdin'
+                        sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
                     }
                 }
                     echo "pushing docker credential"
