@@ -4,7 +4,6 @@ pipeline {
     environment {
         IMAGE_NAME = '16p124manoj/dockerhtmlrepo'
         IMAGE_TAG = 'v1'
-        DOCKER_REPO = 'helloworld-htmlimage'
     }
 
     stages {
@@ -29,7 +28,7 @@ pipeline {
         stage('login to docker'){
             steps{
                 script{
-                    echo "pushing docker image to docker hub"
+                    echo "logging into docker hub with same repository name"
                     withCredentials([usernamePassword(credentialsId: 'jenkins-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     script {
                         sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
@@ -54,5 +53,6 @@ pipeline {
                 sh 'docker image prune -f'
             }
         }
-    }
+    } // stages end
+
 }
