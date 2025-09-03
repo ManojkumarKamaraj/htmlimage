@@ -20,6 +20,7 @@ pipeline {
                 script {
                     echo "the build running  stage "
                     docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                    echo "build stage was succeeded"
                 }
             }
         }
