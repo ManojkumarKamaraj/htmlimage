@@ -9,7 +9,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
                 git branch: 'main', credentialsId: 'mygithubcredentials', url: 'https://github.com/ManojkumarKamaraj/htmlimage.git'
             }
         }
