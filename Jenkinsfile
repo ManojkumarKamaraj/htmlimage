@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'hello-world-html'
+        IMAGE_NAME = 'helloworld-htmlimage'
         IMAGE_TAG = 'latest'
     }
 
