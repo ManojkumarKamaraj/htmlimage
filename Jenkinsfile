@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                echo "the checkout stage "
                 git branch: 'main', credentialsId: 'mygithubcredentials', url: 'https://github.com/ManojkumarKamaraj/htmlimage.git'
             }
         }
@@ -16,6 +17,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    echo "the build running  stage "
                     docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
                 }
             }
