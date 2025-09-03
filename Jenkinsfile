@@ -31,7 +31,7 @@ pipeline {
                     echo "pushing docker image to docker hub"
                     docker.withRegistry('https://index.docker.io/v1/', 'jenkins-credentials')
                     {
-                        dockerImage.push()
+                        dockerimage.push()
                     }
                     echo "pushing docker credential"
                 }
