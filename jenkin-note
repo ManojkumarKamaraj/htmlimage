@@ -1,0 +1,76 @@
+pipeline{
+    agent any
+
+    environment{
+        IMAGE_NAME = '16p124manoj/dockerhtmlrepo' // dockerhub repositary name and image name should be same so it is easy to push
+        IMAGE_TAG = 'v1'
+    }
+
+    stages{
+
+        stage('checkout-scm')
+        {
+            steps{
+                echo 'getting a code from your github/gitlab'
+                git branch: 'main', credentialsId: 'mygithubcredentials', url: 'https://github.com/ManojkumarKamaraj/htmlimage.git'
+                echo 'getting a source/code repository from your scm'
+            }
+        }
+
+        stage(build-a-Image)
+        {
+            steps
+            {
+                script
+                {
+                    echo 'building a docker image with same name as docker hub repo'
+                    docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
+                    echo 'successfully build sn docker image'
+                }
+            }
+        }
+
+        stage(login-to-docker)
+        {
+            steps
+            {
+                script
+                {
+                    echo 'login to docker using usernamePassword Credentials we stored in jenkins'
+                    withCredentials([usernamePassword(credentialsId:'jenkins-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')])
+                    {
+                        script
+                        {
+                            sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
+                        }
+                    }
+                    echo 'logged in with docker credentials'
+                    
+                }
+            }
+        }
+
+        stage(push-to-docker)
+        {
+            steps
+            {
+                echo 'pushing the created/builded image to docker hub repository'
+                script
+                {
+                    sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+                }
+            }
+
+        }
+
+        stage('Cleanup') 
+        {
+            steps 
+            {
+                sh 'docker image prune -f'
+            }
+        }
+
+    }
+    
+}
