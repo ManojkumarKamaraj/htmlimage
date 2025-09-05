@@ -17,7 +17,7 @@ pipeline{
             }
         }
 
-        stage(build-a-Image)
+        stage('build-a-Image')
         {
             steps
             {
@@ -30,7 +30,7 @@ pipeline{
             }
         }
 
-        stage(login-to-docker)
+        stage('login-to-docker')
         {
             steps
             {
@@ -50,7 +50,7 @@ pipeline{
             }
         }
 
-        stage(push-to-docker)
+        stage('push-to-docker')
         {
             steps
             {
