@@ -1,13 +1,15 @@
-pipeline{
+pipeline
+{
     agent any
 
-    environment{
+    environment
+    {
         IMAGE_NAME = '16p124manoj/dockerhtmlrepo' // dockerhub repositary name and image name should be same so it is easy to push
         IMAGE_TAG = 'v1'
     }
 
-    stages{
-
+    stages
+    {
         stage('checkout-scm')
         {
             steps{
@@ -72,5 +74,4 @@ pipeline{
         }
 
     }
-    
 }
